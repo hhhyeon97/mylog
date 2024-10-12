@@ -23,8 +23,14 @@ public class BlogService {
     public List<Article> findAll(){
         return blogRepository.findAll();
     }
+
     // 특정 글 하나 조회 메서드
     public Article findById(Long id){
         return blogRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found : "+id));
+    }
+
+    // 글 삭제 메서드
+    public void delete(Long id){
+        blogRepository.deleteById(id);
     }
 }
