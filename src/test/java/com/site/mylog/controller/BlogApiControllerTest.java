@@ -127,7 +127,7 @@ class BlogApiControllerTest {
                 .andExpect(jsonPath("$.title").value(title));
     }
 
-    @DisplayName("deleteArticle : 블로그 글 삭제에 성공한다.")
+    @DisplayName("deleteArticleById : 블로그 글 삭제에 성공한다.")
     @Test
     public void deleteArticle() throws Exception{
 
@@ -152,7 +152,7 @@ class BlogApiControllerTest {
         assertThat(articles).isEmpty();
     }
 
-    @DisplayName("updateArticle: 블로그 글 수정에 성공한다.")
+    @DisplayName("updateArticleById: 블로그 글 수정에 성공한다.")
     @Test
     public void updateArticle() throws Exception {
         // given
