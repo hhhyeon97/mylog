@@ -2,9 +2,11 @@ package com.site.mylog.service;
 
 import com.site.mylog.domain.Article;
 import com.site.mylog.dto.AddArticleRequest;
+import com.site.mylog.dto.UpdateArticleRequest;
 import com.site.mylog.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +34,16 @@ public class BlogService {
     // 글 삭제 메서드
     public void delete(Long id){
         blogRepository.deleteById(id);
+    }
+
+    // 글 수정 메소드
+    @Transactional // - > 매칭한 메서드를 하나의 트랜잭션으로 묶는다.
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
     }
 }
