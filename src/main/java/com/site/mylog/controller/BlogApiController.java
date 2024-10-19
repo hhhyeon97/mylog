@@ -18,7 +18,7 @@ public class BlogApiController {
 
     private final BlogService blogService;
 
-    // #1
+    // #1 글 작성
     // HTTP 메소드가 POST일 때 전달받은 URL과 동일하면 메소드로 매핑
     @PostMapping("/api/articles")
     // @RequestBody로 요청 본문 값 매핑
@@ -30,7 +30,7 @@ public class BlogApiController {
                 .body(savedArticle);
     }
 
-    // #2
+    // #2 전체 글 조회
     @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticles(){
         List<ArticleResponse> articles = blogService.findAll()
@@ -42,7 +42,7 @@ public class BlogApiController {
                 .body(articles);
     }
 
-    // #3
+    // #3 특정 글 조회
     @GetMapping("/api/articles/{id}")
     // URL 경로에서 값 추출
     public ResponseEntity<ArticleResponse> findArticleById(@PathVariable Long id){
@@ -51,7 +51,7 @@ public class BlogApiController {
         return ResponseEntity.ok().body(new ArticleResponse(article));
     }
 
-    // #4
+    // #4 글 삭제
     @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> deleteArticleById(@PathVariable Long id){
         blogService.delete(id);
@@ -59,7 +59,7 @@ public class BlogApiController {
         return ResponseEntity.ok().build();
     }
 
-    // #5
+    // #5 글 수정
     @PutMapping("/api/articles/{id}")
     public ResponseEntity<Article> updateArticleById(@PathVariable Long id,
                                                      @RequestBody UpdateArticleRequest request){
