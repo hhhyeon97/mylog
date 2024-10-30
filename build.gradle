@@ -31,16 +31,30 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // mysql 연결
+    // MySQL 데이터베이스와의 연결을 위한 드라이버 의존성
     runtimeOnly 'com.mysql:mysql-connector-j'
-    // 타임리프
+    // 타임리프 - 서버에서 HTML 파일을 렌더링
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     // 스프링 시큐리티를 사용하기 위한 스타터 추가
     implementation 'org.springframework.boot:spring-boot-starter-security'
     // 타임리프에서 스프링 시큐리티를 사용하기 위한 의존성 추가
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     // 스프링 시큐리티를 테스트하기 위한 의존성 추가
+    // 테스트 시에 인증/인가를 쉽게 시뮬레이션할 수 있음
     testImplementation 'org.springframework.security:spring-security-test'
+
+    //Lombok을 테스트 코드에서도 사용하기 위한 설정 
+    //자동으로 생성되는 getter/setter, 빌더 패턴 등을 지원
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    // Lombok을 테스트 의존성으로 추가하여 반복적인 코드 생성을 줄여준다.
+    testImplementation 'org.projectlombok:lombok'
+    // 자바 JWT 라이브러리
+    // Java에서 JWT(JSON Web Token) 생성을 위한 라이브러리로,
+    // 토큰 기반 인증을 구현할 때 사용
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    // XML 문서와 Java 객체 간 매핑 자동화
+    // XML 데이터와의 상호 변환을 자동화해준다.
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
 }
 
 tasks.named('test') {
