@@ -55,6 +55,9 @@ dependencies {
     // XML 문서와 Java 객체 간 매핑 자동화
     // XML 데이터와의 상호 변환을 자동화해준다.
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    // OAuth2를 사용하기 위한 스타터 추가
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
