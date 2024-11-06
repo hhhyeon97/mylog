@@ -5,6 +5,7 @@ import com.site.mylog.dto.AddArticleRequest;
 import com.site.mylog.dto.UpdateArticleRequest;
 import com.site.mylog.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +18,9 @@ public class BlogService {
     private final BlogRepository blogRepository;
 
     // 블로그 글 추가 메소드
-    public Article save(AddArticleRequest request){
-        return blogRepository.save(request.toEntity());
+    public Article save(AddArticleRequest request, String userName){
+        return blogRepository.save(request.toEntity(userName));
     }
-    
     // db에 저장되어 있는 모든 글을 가져오는 메소드
     public List<Article> findAll(){
         return blogRepository.findAll();
@@ -32,18 +32,31 @@ public class BlogService {
     }
 
     // 글 삭제 메서드
-    public void delete(Long id){
-        blogRepository.deleteById(id);
+    public void delete(long id) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        authorizeArticleAuthor(article);
+        blogRepository.delete(article);
     }
 
-    // 글 수정 메소드
-    @Transactional // - > 매칭한 메서드를 하나의 트랜잭션으로 묶는다.
+    // 글 수정 메서드
+    @Transactional
     public Article update(long id, UpdateArticleRequest request) {
         Article article = blogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
+        authorizeArticleAuthor(article);
         article.update(request.getTitle(), request.getContent());
 
         return article;
+    }
+
+    // 게시글을 작성한 유저인지 확인
+    private static void authorizeArticleAuthor(Article article) {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!article.getAuthor().equals(userName)) {
+            throw new IllegalArgumentException("not authorized");
+        }
     }
 }

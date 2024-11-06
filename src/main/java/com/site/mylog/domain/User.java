@@ -26,15 +26,27 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
+    // 사용자 이름
+    @Column(name = "nickname", unique = true)
+    private String nickname;
+
+    // 생성자에 nickname 추가
     @Builder
-    public User(String email, String password, String auth) {
+    public User(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
     }
 
+    // 사용자 이름 변경
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
+    }
 
     @Override // 권한 반환
     public Collection<? extends GrantedAuthority> getAuthorities() {

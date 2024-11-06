@@ -1,3 +1,4 @@
+/*
 package com.site.mylog.config;
 
 import com.site.mylog.service.UserDetailService;
@@ -81,4 +82,4 @@ public class WebSecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-}
+}*/
