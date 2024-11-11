@@ -17,11 +17,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-
-jwt:
-  issuer: abc@gmail.com
-  secret_key: study-springboot
-
   security:
     oauth2:
       client:
@@ -32,3 +27,7 @@ jwt:
             scope:
               - email
               - profile
+jwt:
+  issuer: abc@gmail.com
+  secret_key: study-springboot
+
