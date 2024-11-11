@@ -5,7 +5,7 @@
 
 ### ⌚ 프로젝트 기간
 
-2024.10.09 - 2024.11.6 (4주)
+2024.10.09 - 2024.11.12 (5주)
 
 ### 📚 기술 스택
 
@@ -15,8 +15,20 @@
 - ORM: Spring Data JPA
 - Security: Spring Security, JWT, OAuth2
 - Template Engine : Thymeleaf
+- API Testing: Postman
+- Deploy: AWS (Elastic Beanstalk, RDS)
 - CI/CD: GitHub Actions
 
-### 🕵️ 주요 기능 
+### 🕵️ 주요 기능
 
-### 🌟 업데이트 
+- REST API CRUD 구현
+- 로그인 및 인증 처리 (Spring Security, JWT, OAuth2)
+- AWS 배포 자동화
+- CI/CD 파이프라인 구축
+
+### 트러블 슈팅
+<a href="https://github.com/hhhyeon97/mylog/wiki/%EB%A7%88%EC%A3%BC%EC%B3%A4%EB%8D%98-%EC%97%90%EB%9F%AC">
+마주쳤던 문제
+</a>
+
+[//]: # (### 🌟 업데이트 )
